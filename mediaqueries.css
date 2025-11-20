@@ -107,3 +107,110 @@
     font-size: 1rem;
   }
 }
+/* --------- Mobile hamburger + menu (drop-in) --------- */
+
+/* default: hide hamburger on desktop */
+.hamburger-icon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3000;
+}
+
+/* the three bars */
+.hamburger-icon span {
+  display: block;
+  width: 22px;
+  height: 2.6px;
+  background: #7c3aed; /* or use your color variable */
+  border-radius: 2px;
+  transition: transform 0.28s ease, opacity 0.18s ease;
+}
+
+/* transform into X when open */
+.hamburger-icon.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.2);
+}
+.hamburger-icon.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* default menu (desktop) — your existing rule probably sets this
+   We'll override for mobile inside media query. */
+.menu-links {
+  /* keep desktop behavior as-is */
+}
+
+/* MOBILE: show hamburger and hide desktop horizontal links */
+@media (max-width: 900px) {
+  /* show hamburger */
+  .hamburger-icon {
+    display: inline-flex;
+  }
+
+  /* hide desktop nav-links (horizontal) — these are the ul items */
+  .nav-links {
+    display: none;
+  }
+
+  /* mobile dropdown container (initially hidden) */
+  .menu-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px); /* just below the nav */
+    right: 0;
+    left: 0;                 /* full width under centered nav */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;       /* keep same max width as nav */
+    background: #fff;       /* light mode */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-radius: 0 0 18px 18px;
+    padding: 14px 20px;
+    z-index: 2500;
+    transform-origin: top center;
+    animation: none;
+  }
+
+  /* dark-mode background */
+  body.dark-mode .menu-links {
+    background: #23263a;
+  }
+
+  /* open state */
+  .menu-links.open {
+    display: block;
+    animation: dropdown 220ms cubic-bezier(.2,.9,.3,1) both;
+  }
+
+  /* inside the dropdown, show nav-links vertically */
+  .menu-links.open .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-links.open .nav-links a {
+    display: block;
+    padding: 10px 8px;
+    border-radius: 8px;
+  }
+}
+
+/* small dropdown animation */
+@keyframes dropdown {
+  from { opacity: 0; transform: translateY(-8px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
