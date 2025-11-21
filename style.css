@@ -96,7 +96,7 @@ body {
 
 /* SECTIONS GENERAL */
 section {
-  padding: 6rem 0;
+  padding: 10rem 0;
 }
 
 /* NAVIGATION */
@@ -214,6 +214,65 @@ nav {
   color: var(--text-secondary);
   max-width: 500px;
   margin-bottom: 2rem;
+}
+
+.profile-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  padding: 4px;
+  /* Thickness of the ring */
+  background: conic-gradient(#EA4335,
+      /* Red */
+      #4285F4,
+      /* Blue */
+      #34A853,
+      /* Green */
+      #FBBC05,
+      /* Yellow */
+      #EA4335
+      /* Red to close loop */
+    );
+  margin-bottom: 1.5rem;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+/* The Glow Effect */
+.profile-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  /* Extend slightly outside */
+  border-radius: 50%;
+  background: inherit;
+  /* Use same gradient */
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-color);
+  /* Ensure bg behind image is solid if transparent */
+  border: 2px solid var(--bg-color);
+  /* Inner spacing */
+  display: block;
+}
+
+.profile-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.profile-wrapper:hover::before {
+  opacity: 1;
+  filter: blur(20px);
 }
 
 .hero-btn {
@@ -404,6 +463,64 @@ footer {
 .social-links a:hover {
   color: var(--accent-color);
   transform: translateY(-3px);
+}
+
+/* EDUCATION */
+.education-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.edu-item {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color);
+  transition: var(--transition);
+}
+
+.edu-item:hover {
+  transform: translateY(-5px);
+  background: var(--card-bg);
+}
+
+.edu-item h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.edu-item p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ACHIEVEMENTS */
+.achievements-content {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.achievements-content ul {
+  list-style: none;
+}
+
+.achievements-content li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.achievements-content li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+.achievements-content strong {
+  color: var(--accent-color);
 }
 
 /* RESPONSIVE */
