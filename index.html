@@ -1,209 +1,605 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Debatosh | Backend Architect</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@400;500;700;800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debatosh Roychowdhury — AI/ML Specialist & Full-Stack Engineer</title>
+    <meta name="description" content="Portfolio of Debatosh Roychowdhury, Computer Science Engineering Graduate specializing in AI/ML, Computer Vision (YOLO, 3D CNN), and Full-Stack Web Development.">
+    <meta name="keywords" content="Debatosh Roychowdhury, Computer Science Engineer, AI ML Engineer, Computer Vision, YOLO, OpenCV, Node.js, Python, Deepfake Detection, Fall Detection">
+    <meta name="author" content="Debatosh Roychowdhury">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Debatosh Roychowdhury — AI/ML & Full-Stack Engineer">
+    <meta property="og:description" content="Explore computer vision research, real-time fall detection, 3D CNN deepfake analysis, and full-stack web applications by Debatosh Roychowdhury.">
+    <meta property="og:image" content="assets/images/avatar.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <nav>
-    <a href="#" class="logo">DRC</a>
-    <div class="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Work</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="./assets/resume.pdf" class="btn" target="_blank">Resume</a></li>
-    </ul>
-  </nav>
 
-  <section id="hero">
-    <div class="hero-content hidden">
-      <div class="hero-text">
-        <div class="profile-wrapper">
-          <img src="./assets/profile.jpeg" alt="Debatosh Roychowdhury" class="profile-pic">
+    <!-- Particle Backdrop Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Ambient Neon Gradients -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Navigation Header -->
+    <header class="site-header" id="header">
+        <div class="container header-content">
+            <a href="#hero" class="brand-logo" id="brandLogo">
+                <span class="logo-bracket">&lt;</span><span class="logo-name">Debatosh.Dev</span><span class="logo-slash">/&gt;</span>
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-icon" id="terminalToggleBtn" title="Launch Interactive Terminal (Ctrl+`)">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span class="btn-badge">CLI</span>
+                </button>
+                <button class="btn-icon" id="themeToggleBtn" title="Toggle Light / Dark Mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
-        <p class="mono">Hi, my name is</p>
-        <h1>Debatosh Roychowdhury.</h1>
-        <h2>I build scalable web applications.</h2>
-        <p>I'm a Final-year Computer Science Engineering student and Backend Developer passionate about building
-          scalable web applications and real-time AI solutions. Currently, I'm focused on leveraging my skills in
-          problem-solving and system design.</p>
-        <a href="#projects" class="hero-btn">Check out my work!</a>
-      </div>
-      <div class="code-window">
-        <div class="window-header">
-          <div class="dot red"></div>
-          <div class="dot yellow"></div>
-          <div class="dot green"></div>
+    </header>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
+
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <div class="status-pill">
+                        <span class="pulse-dot"></span>
+                        <span class="status-text">Available for Software & AI/ML Roles</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Engineering Next-Gen <br>
+                        <span class="highlight-text typing-target" id="typingText">AI & Computer Vision</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Hi, I'm <strong>Debatosh Roychowdhury</strong> — a Computer Science Engineering graduate specializing in real-time computer vision, deep learning models (YOLO & 3D CNNs), and robust full-stack web applications.
+                    </p>
+
+                    <div class="hero-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value" data-target="98.3">0</span><span class="metric-percent">%</span>
+                            <span class="metric-label">Fall Detection F1-Score</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value" data-target="34">0</span><span class="metric-plus">+</span>
+                            <span class="metric-label">Real-Time FPS Inference</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value" data-target="1">0</span><span class="metric-plus">st</span>
+                            <span class="metric-label">SIH Hackathon Winner</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fa-solid fa-rocket"></i> View Featured Projects
+                        </a>
+                        <button class="btn btn-outline" id="heroTerminalBtn">
+                            <i class="fa-solid fa-terminal"></i> Launch Interactive CLI
+                        </button>
+                        <a href="#contact" class="btn btn-ghost">
+                            <i class="fa-solid fa-paper-plane"></i> Get In Touch
+                        </a>
+                    </div>
+
+                    <div class="social-pills">
+                        <a href="https://github.com/drcdebtosh" target="_blank" rel="noopener" class="social-pill" title="GitHub">
+                            <i class="fa-brands fa-github"></i> <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/debatosh-roychowdhury/" target="_blank" rel="noopener" class="social-pill" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i> <span>LinkedIn</span>
+                        </a>
+                        <a href="tel:6297856449" class="social-pill" title="Phone">
+                            <i class="fa-solid fa-phone"></i> <span>+91 6297856449</span>
+                        </a>
+                        <button class="social-pill copy-email-pill" id="copyEmailBtn" title="Click to copy email">
+                            <i class="fa-regular fa-copy"></i> <span id="copyEmailText">debatoshofficial85@gmail.com</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="avatar-card-container tilt-card" id="avatarCard">
+                        <div class="avatar-card-glow"></div>
+                        <div class="avatar-card-inner">
+                            <div class="avatar-image-wrapper">
+                                <img src="assets/images/professional.jpeg" alt="Debatosh Roychowdhury Avatar" class="avatar-img">
+                                <div class="avatar-badge">
+                                    <i class="fa-solid fa-award"></i> SIH 2024 Winner
+                                </div>
+                            </div>
+                            <div class="avatar-info">
+                                <div class="avatar-name">Debatosh Roychowdhury</div>
+                                <div class="avatar-role">Computer Science Engineer & AI Specialist</div>
+                                <div class="tech-stack-pills">
+                                    <span class="tech-pill"><i class="fa-brands fa-python"></i> Python</span>
+                                    <span class="tech-pill"><i class="fa-solid fa-eye"></i> OpenCV</span>
+                                    <span class="tech-pill"><i class="fa-solid fa-microchip"></i> YOLO</span>
+                                    <span class="tech-pill"><i class="fa-brands fa-node-js"></i> Node.js</span>
+                                </div>
+                            </div>
+                            <div class="avatar-status-bar">
+                                <div class="status-item">
+                                    <i class="fa-solid fa-graduation-cap"></i> B.Tech CSE (2022–2026)
+                                </div>
+                                <div class="status-item">
+                                    <i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section about-section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-user-astronaut"></i> System Overview</div>
+                    <h2 class="section-title">Software Engineering & AI/ML Expertise</h2>
+                    <p class="section-description">
+                        Computer Science Engineering graduate with hands-on experience developing real-time AI computer vision pipelines, deepfake analysis, and scalable full-stack applications.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card glass-card">
+                        <div class="about-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>AI & Computer Vision</h3>
+                        <p>Specialized in real-time pose estimation, YOLO object detection, 3D CNN temporal feature extraction, and MediaPipe landmark tracking.</p>
+                        <ul class="about-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Real-time Fall Detection FSM & CA-EMA Keypoint Smoothing</li>
+                            <li><i class="fa-solid fa-circle-check"></i> 3D CNN Deepfake Video Analysis Pipeline</li>
+                            <li><i class="fa-solid fa-circle-check"></i> High FPS Edge & GPU Inference (PyTorch & OpenCV)</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card glass-card">
+                        <div class="about-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3>Full-Stack Web Development</h3>
+                        <p>Building responsive web frontends and high-performance REST APIs for interactive AI web applications and database-backed platforms.</p>
+                        <ul class="about-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Node.js, Express.js & MongoDB Backend Architecture</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Flask Web Dashboards & RESTful APIs</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Database Query Optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card glass-card">
+                        <div class="about-icon"><i class="fa-solid fa-code"></i></div>
+                        <h3>Core Computer Science</h3>
+                        <p>Strong theoretical foundation and practical application in core engineering principles, problem solving, and software design.</p>
+                        <ul class="about-list">
+                            <li><i class="fa-solid fa-circle-check"></i> Data Structures & Algorithms (Java, Python, JS)</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Object-Oriented Programming (OOP) & SDLC</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Operating Systems, DBMS & Computer Networks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-sliders"></i> Skill Radar</div>
+                    <h2 class="section-title">Technical Capabilities & Tooling</h2>
+                    <p class="section-description">
+                        Explore my technical stack across AI/ML frameworks, programming languages, web backends, and core CS fundamentals.
+                    </p>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="skill-tabs" id="skillTabs">
+                    <button class="skill-tab active" data-category="all">All Skills</button>
+                    <button class="skill-tab" data-category="ai">AI / ML & Vision</button>
+                    <button class="skill-tab" data-category="languages">Languages</button>
+                    <button class="skill-tab" data-category="web">Web & Backend</button>
+                    <button class="skill-tab" data-category="cs">CS Core</button>
+                </div>
+
+                <div class="skills-grid" id="skillsGrid">
+                    <!-- Dynamic rendering via script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section projects-section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-cubes"></i> Research & Projects</div>
+                    <h2 class="section-title">Featured Engineering Projects</h2>
+                    <p class="section-description">
+                        Real-world computer vision benchmarks, AI deepfake detectors, and full-stack web applications.
+                    </p>
+                </div>
+
+                <div class="project-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="projectSearch" placeholder="Search by name, tech stack, or feature..." class="search-input">
+                        <button class="clear-search-btn" id="clearSearchBtn" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <div class="project-filters" id="projectFilters">
+                        <button class="filter-btn active" data-filter="all">All Projects</button>
+                        <button class="filter-btn" data-filter="ai">AI / Computer Vision</button>
+                        <button class="filter-btn" data-filter="fullstack">Full-Stack Web</button>
+                    </div>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Project cards injected via JS -->
+                </div>
+
+                <!-- Interactive System Architecture Pipeline Widget -->
+                <div class="pipeline-widget-container glass-card margin-top-xl" id="pipelineWidget">
+                    <div class="pipeline-widget-header">
+                        <div class="pipeline-tag"><i class="fa-solid fa-diagram-project"></i> System Architecture</div>
+                        <h3 class="pipeline-title">Real-Time AI Vision Pipeline Workflow</h3>
+                        <p class="pipeline-subtitle">Click any pipeline step to inspect deep technical engineering mechanics and metrics.</p>
+                    </div>
+
+                    <!-- Flowchart Node Grid -->
+                    <div class="pipeline-flow-grid">
+                        <div class="pipeline-node active" data-node="input">
+                            <div class="node-icon"><i class="fa-solid fa-video"></i></div>
+                            <div class="node-info">
+                                <span class="node-step">Step 01</span>
+                                <span class="node-name">RTSP / Video Feed</span>
+                            </div>
+                            <div class="node-badge">Input Stream</div>
+                        </div>
+
+                        <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <div class="pipeline-node" data-node="yolo">
+                            <div class="node-icon"><i class="fa-solid fa-microchip"></i></div>
+                            <div class="node-info">
+                                <span class="node-step">Step 02</span>
+                                <span class="node-name">YOLO-Pose Backbone</span>
+                            </div>
+                            <div class="node-badge">17 Keypoints</div>
+                        </div>
+
+                        <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <div class="pipeline-node" data-node="caema">
+                            <div class="node-icon"><i class="fa-solid fa-wave-square"></i></div>
+                            <div class="node-info">
+                                <span class="node-step">Step 03</span>
+                                <span class="node-name">CA-EMA Smoothing</span>
+                            </div>
+                            <div class="node-badge">+3.12% Precision</div>
+                        </div>
+
+                        <div class="pipeline-connector"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <div class="pipeline-node" data-node="fsm">
+                            <div class="node-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div class="node-info">
+                                <span class="node-step">Step 04</span>
+                                <span class="node-name">5-Stage FSM Triage</span>
+                            </div>
+                            <div class="node-badge">Real-Time Alert</div>
+                        </div>
+                    </div>
+
+                    <!-- Node Detail Inspector Card -->
+                    <div class="node-detail-card" id="nodeDetailCard">
+                        <!-- Dynamic rendering via script.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Achievements Section -->
+        <section class="section experience-section" id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-briefcase"></i> Experience & Honors</div>
+                    <h2 class="section-title">Internships & Achievements</h2>
+                    <p class="section-description">
+                        Hands-on industry internship experience and hackathon leadership victories.
+                    </p>
+                </div>
+
+                <div class="timeline" id="experienceTimeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Jun 2025 — Jul 2025</div>
+                        <div class="timeline-content glass-card">
+                            <div class="timeline-role">Full Stack Intern</div>
+                            <div class="timeline-company"><i class="fa-solid fa-laptop-code"></i> CodeSoft (Remote)</div>
+                            <p class="timeline-desc">
+                                Developed and enhanced a full-stack Job Portal web application. Optimized MongoDB database queries, designed RESTful APIs using Express.js and JavaScript, and collaborated in an agile team to meet project milestones.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Express.js</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">REST APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024</div>
+                        <div class="timeline-content glass-card">
+                            <div class="timeline-role">🏆 SIH Internal Hackathon Winner 2024</div>
+                            <div class="timeline-company"><i class="fa-solid fa-trophy"></i> Smart India Hackathon (1st Place out of 123 Teams)</div>
+                            <p class="timeline-desc">
+                                Secured 1st place among 123 participating engineering teams by architecting and developing the complete backend and frontend of a real-time Deepfake Detection System.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="tag">1st Place Winner</span>
+                                <span class="tag">Deepfake AI</span>
+                                <span class="tag">3D CNN</span>
+                                <span class="tag">Flask</span>
+                                <span class="tag">OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section education-section" id="education">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</div>
+                    <h2 class="section-title">Education & Credentials</h2>
+                    <p class="section-description">
+                        Strong foundation in Computer Science & Engineering from premier institutions.
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: var(--accent-magenta);"></div>
+                        <div class="timeline-date">2022 — 2026</div>
+                        <div class="timeline-content glass-card">
+                            <div class="timeline-role">B.Tech in Computer Science and Engineering</div>
+                            <div class="timeline-company"><i class="fa-solid fa-university"></i> Techno International Newtown, Kolkata</div>
+                            <p class="timeline-desc">
+                                <strong>CGPA: 7.84</strong> | Specializing in AI/ML, Computer Vision, Data Structures, Software Engineering, and Web Development.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: var(--accent-purple);"></div>
+                        <div class="timeline-date">2022</div>
+                        <div class="timeline-content glass-card">
+                            <div class="timeline-role">Class XII (Higher Secondary)</div>
+                            <div class="timeline-company"><i class="fa-solid fa-school"></i> Gobardanga Khantura High School, Gobardanga</div>
+                            <p class="timeline-desc">
+                                <strong>Percentage: 85%</strong> | Science stream with focus on Physics, Chemistry, and Mathematics.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="border-color: var(--accent-cyan);"></div>
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-content glass-card">
+                            <div class="timeline-role">Class X (Secondary)</div>
+                            <div class="timeline-company"><i class="fa-solid fa-school"></i> Gobardanga Khantura High School, Gobardanga</div>
+                            <p class="timeline-desc">
+                                <strong>Percentage: 91%</strong> | Secondary Education Board Examination.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag"><i class="fa-solid fa-paper-plane"></i> Connect</div>
+                    <h2 class="section-title">Let's Discuss Opportunities</h2>
+                    <p class="section-description">
+                        Interested in hiring me for Software Engineering, AI/ML, or Computer Vision roles? Reach out via direct message or call!
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info glass-card">
+                        <h3>Contact Information</h3>
+                        <p class="margin-bottom-lg">I am actively seeking software development, AI/ML engineering, and mobility tech opportunities.</p>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Email Address</span>
+                                <a href="mailto:debatoshofficial85@gmail.com" class="info-value">debatoshofficial85@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Phone / WhatsApp</span>
+                                <a href="tel:6297856449" class="info-value">+91 6297856449</a>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="info-text">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Kolkata, West Bengal, India</span>
+                            </div>
+                        </div>
+
+                        <div class="social-connect">
+                            <h4>Connect Across Profiles</h4>
+                            <div class="social-grid">
+                                <a href="https://www.linkedin.com/in/debatosh-roychowdhury/" target="_blank" rel="noopener" class="social-link-card">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://github.com/drcdebtosh" target="_blank" rel="noopener" class="social-link-card">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container glass-card">
+                        <form id="contactForm" class="contact-form" action="https://formsubmit.co/debatoshofficial85@gmail.com" method="POST" novalidate>
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_subject" value="New Portfolio Contact Message!">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Your Name <span class="required">*</span></label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Recruiter / Hiring Manager" required>
+                                    <span class="error-msg" id="nameError">Please enter your name</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="hiring@company.com" required>
+                                    <span class="error-msg" id="emailError">Please enter a valid email</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Job Opportunity / Project Inquiry">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="5" class="form-control" placeholder="Write your message here..." required maxlength="1000"></textarea>
+                                <div class="textarea-footer">
+                                    <span class="error-msg" id="messageError">Please enter a message</span>
+                                    <span class="char-counter"><span id="charCount">0</span>/1000</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                                <i class="fa-solid fa-paper-plane"></i> Transmit Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <a href="#hero" class="brand-logo">
+                    <span class="logo-bracket">&lt;</span><span class="logo-name">Debatosh.Dev</span><span class="logo-slash">/&gt;</span>
+                </a>
+                <p class="footer-tagline">Computer Science Engineering • AI/ML & Computer Vision Specialist.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-right">
+                <p>&copy; 2026 Debatosh Roychowdhury. All rights reserved.</p>
+                <p class="system-status"><span class="status-indicator"></span> Operational • Kolkata, India</p>
+            </div>
         </div>
-        <div class="window-body">
-          <span class="code-line"><span class="keyword">const</span> <span class="function">developer</span> = {</span>
-          <span class="code-line">&nbsp;&nbsp;name: <span class="string">'Debatosh'</span>,</span>
-          <span class="code-line">&nbsp;&nbsp;role: <span class="string">'Backend Developer'</span>,</span>
-          <span class="code-line">&nbsp;&nbsp;skills: [<span class="string">'Java'</span>, <span
-              class="string">'Python'</span>, <span class="string">'MERN'</span>],</span>
-          <span class="code-line">&nbsp;&nbsp;hardWorker: <span class="keyword">true</span>,</span>
-          <span class="code-line">&nbsp;&nbsp;problemSolver: <span class="keyword">true</span>,</span>
-          <span class="code-line">&nbsp;&nbsp;<span class="function">hireable</span>: <span
-              class="function">function</span>() {</span>
-          <span class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span
-              class="keyword">true</span>;</span>
-          <span class="code-line">&nbsp;&nbsp;}</span>
-          <span class="code-line">};</span>
+    </footer>
+
+    <!-- Interactive Project Details Modal -->
+    <div class="modal-overlay" id="projectModal" aria-hidden="true">
+        <div class="modal-card glass-card">
+            <button class="modal-close" id="modalCloseBtn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamically populated -->
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <section id="experience" class="container">
-    <h2 class="section-title">Where I've Worked</h2>
-    <div class="experience-content hidden">
-      <h3>Full Stack Intern <span class="mono">@ Codesoft</span></h3>
-      <p class="mono">Jan 2025 - Feb 2025 | Remote</p>
-      <ul>
-        <li>Collaborated on the development of the Full Stack Job Portal, contributing to both front-end and back-end
-          tasks.</li>
-        <li>Assisted in optimizing database queries and improving API performance using Express.js, JavaScript, and
-          MongoDB.</li>
-        <li>Gained hands-on experience in agile development and cross-functional team collaboration.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="education" class="container">
-    <h2 class="section-title">Education</h2>
-    <div class="education-content hidden">
-      <div class="edu-item">
-        <h3>B. Tech. – CSE</h3>
-        <p class="mono">Techno International Newtown | 2026</p>
-        <p>CGPA: 7.63</p>
-      </div>
-      <div class="edu-item">
-        <h3>12th – Science</h3>
-        <p class="mono">Gobardanga Khantura High School | 2022</p>
-        <p>Percentage: 85%</p>
-      </div>
-      <div class="edu-item">
-        <h3>10th – General</h3>
-        <p class="mono">Gobardanga Khantura High School | 2020</p>
-        <p>Percentage: 91%</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills" class="container">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-container hidden">
-      <div class="skill-item">
-        <i class="devicon-java-plain"></i>
-        <p>Java</p>
-      </div>
-      <div class="skill-item">
-        <i class="devicon-python-plain"></i>
-        <p>Python</p>
-      </div>
-      <div class="skill-item">
-        <i class="devicon-javascript-plain"></i>
-        <p>JavaScript</p>
-      </div>
-      <div class="skill-item">
-        <i class="devicon-express-original"></i>
-        <p>Express.js</p>
-      </div>
-      <div class="skill-item">
-        <i class="devicon-mysql-plain"></i>
-        <p>MySQL</p>
-      </div>
-      <div class="skill-item">
-        <i class="devicon-git-plain"></i>
-        <p>Git</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="container">
-    <h2 class="section-title">Some Things I've Built</h2>
-    <div class="project-grid hidden">
-      <!-- Project 1 -->
-      <div class="project-card" onclick="window.open('https://github.com/drcdebtosh/deepfake-webapp', '_blank')">
-        <div class="folder-icon">📁</div>
-        <h3>Deepfake Detection using 3D CNN</h3>
-        <p>Developed a 3D CNN pipeline with Google MediaPipe for real-time deepfake detection. Built a Flask web app
-          displaying results in under 2 seconds.</p>
-        <div class="tech-stack">
-          <span>Python</span>
-          <span>TensorFlow</span>
-          <span>Flask</span>
-          <span>OpenCV</span>
+    <!-- Interactive CLI Terminal Drawer -->
+    <div class="terminal-drawer" id="terminalDrawer" aria-hidden="true">
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <i class="fa-solid fa-terminal"></i> Debatosh.Dev Interactive CLI Shell v2.4
+            </div>
+            <div class="terminal-controls">
+                <button class="terminal-btn-action" id="terminalMatrixBtn" title="Matrix Rain Mode"><i class="fa-solid fa-code"></i> Matrix</button>
+                <button class="terminal-btn-action" id="terminalClearBtn" title="Clear Console"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                <button class="terminal-btn-action" id="terminalCloseBtn" aria-label="Close terminal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
         </div>
-      </div>
 
-      <!-- Project 2 -->
-      <div class="project-card" onclick="window.open('https://github.com/drcdebtosh/hireminds', '_blank')">
-        <div class="folder-icon">📁</div>
-        <h3>Full Stack Job Portal</h3>
-        <p>Full-stack job portal with resume upload, smart filtering, and secure recruiter-candidate interaction.</p>
-        <div class="tech-stack">
-          <span>MERN Stack</span>
-          <span>JWT Auth</span>
-          <span>Cloudinary</span>
+        <div class="terminal-body" id="terminalBody">
+            <div class="terminal-welcome">
+                <p class="terminal-highlight">Welcome to Debatosh Roychowdhury's Interactive Portfolio Shell</p>
+                <p>Type <span class="cmd-keyword">'help'</span> to view available commands, or try <span class="cmd-keyword">'skills'</span>, <span class="cmd-keyword">'projects'</span>, <span class="cmd-keyword">'education'</span>, <span class="cmd-keyword">'contact'</span>, <span class="cmd-keyword">'sudo hire'</span>.</p>
+            </div>
+            <div class="terminal-output" id="terminalOutput"></div>
+            <div class="terminal-input-line">
+                <span class="terminal-prompt">debatosh@kolkata:~$</span>
+                <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <section id="achievements" class="container">
-    <h2 class="section-title">Achievements & Certifications</h2>
-    <div class="achievements-content hidden">
-      <ul>
-        <li><strong>SIH Internal Hackathon Winner 2024:</strong> Developed the backend and frontend with Flask, HTML,
-          and CSS for the deepfake detection website. Winner out of 123 teams.</li>
-        <li><strong>Hackathon Finalist 2023:</strong> Led a team to the finals in Inter College Smart India Hackathon.
-        </li>
-        <li><strong>Full Stack Web Development</strong> Certification.</li>
-        <li><strong>Goldman Sachs Software Engineering</strong> Virtual Experience Program.</li>
-      </ul>
-    </div>
-  </section>
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
 
-  <section id="contact" class="container" style="text-align: center; padding-bottom: 100px;">
-    <p class="mono" style="color: var(--accent-color); margin-bottom: 1rem;">What's Next?</p>
-    <h2 style="font-size: 3rem; color: var(--text-primary); margin-bottom: 1rem;">Get In Touch</h2>
-    <p style="max-width: 600px; margin: 0 auto 3rem auto; color: var(--text-secondary);">
-      I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to
-      say hi, I'll try my best to get back to you!
-    </p>
-    <a href="mailto:debatoshofficial85@gmail.com" class="hero-btn">Say Hello</a>
-  </section>
-
-  <footer>
-    <div class="social-links">
-      <a href="https://github.com/drcdebtosh" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/debatosh-roychowdhury/" target="_blank">LinkedIn</a>
-      <a href="https://twitter.com/drcdebtosh" target="_blank">Twitter</a>
-    </div>
-    <p>Designed & Built by Debatosh Roychowdhury</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
 </body>
-
 </html>
